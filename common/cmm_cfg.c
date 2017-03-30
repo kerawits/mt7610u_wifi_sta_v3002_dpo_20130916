@@ -984,8 +984,10 @@ INT RTMP_COM_IoctlHandle(
 			RT_CMD_INF_UP_DOWN *pInfConf = (RT_CMD_INF_UP_DOWN *)pData;
 
 			VIRTUAL_IF_DEC(pAd);
-			if (VIRTUAL_IF_NUM(pAd) == 0)
+			if (VIRTUAL_IF_NUM(pAd) == 0){
+				CFG80211OS_ScanEnd(pAd->pCfg80211_CB, false);
 				pInfConf->rt28xx_close(pAd->net_dev);
+			}
 		}
 			break;
 

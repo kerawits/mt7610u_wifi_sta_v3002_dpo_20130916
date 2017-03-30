@@ -3222,7 +3222,12 @@ VOID CFG80211OS_ScanEnd(
 
 
 	CFG80211DBG(RT_DEBUG_ERROR, ("80211> cfg80211_scan_done\n"));
-	cfg80211_scan_done(pCfg80211_CB->pCfg80211_ScanReq, FlgIsAborted);
+	// cfg80211_scan_done(pCfg80211_CB->pCfg80211_ScanReq, FlgIsAborted);
+	if (pCfg80211_CB->pCfg80211_ScanReq) {
+		cfg80211_scan_done(pCfg80211_CB->pCfg80211_ScanReq, FlgIsAborted);
+		pCfg80211_CB->pCfg80211_ScanReq = NULL;
+	}
+
 #endif /* CONFIG_STA_SUPPORT */
 #endif /* LINUX_VERSION_CODE */
 }
